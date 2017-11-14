@@ -199,6 +199,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711140157552_InitialModel.cs" />
+    <Compile Include="Migrations\201711140157552_InitialModel.Designer.cs">
+      <DependentUpon>201711140157552_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711140305483_ModelsConstraintsUpdate.cs" />
+    <Compile Include="Migrations\201711140305483_ModelsConstraintsUpdate.Designer.cs">
+      <DependentUpon>201711140305483_ModelsConstraintsUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -241,6 +249,12 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <EmbeddedResource Include="Migrations\201711140157552_InitialModel.resx">
+      <DependentUpon>201711140157552_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711140305483_ModelsConstraintsUpdate.resx">
+      <DependentUpon>201711140305483_ModelsConstraintsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\SeedData\Roles.xml" />
     <EmbeddedResource Include="Models\SeedData\States.xml" />
     <Content Include="Scripts\bootstrap.js" />

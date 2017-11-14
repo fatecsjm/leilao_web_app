@@ -7,7 +7,12 @@ namespace Projeto.Models
     {
         [Key]
         public DateTime date_hour { get; set; }
-        public int value { get; set; }
+
+        //public int value { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{}")]
+        public Decimal Value { get; set; }
 
         [Key]
         public virtual ApplicationUser ApplicationUser { get; set; }

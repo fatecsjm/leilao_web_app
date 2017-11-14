@@ -11,10 +11,12 @@ namespace Projeto.Models
     {
         [Key]
         public int AddressId { get; set; }
+        [Required]
         public string Line1 { get; set; }
         public string Line2 { get; set; }
         public string ZipCode { get; set; }
         public int AddressNumber { get; set; }
+        [Required]
         public DateTime Date { get; set; }
 
         [Key]

@@ -10,7 +10,7 @@ namespace Projeto.Models
         public virtual ArtWork Artwork { get; set; }
         [Key]
         public virtual ApplicationUser ApplicationUser { get; set; }
-
+        [Required]
         public DateTime InsertionDate { get; set; }
     }
 }

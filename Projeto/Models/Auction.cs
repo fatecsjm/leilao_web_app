@@ -11,12 +11,22 @@ namespace Projeto.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public DateTime InitialDate { get; set; }
+
+        [Required]
         public DateTime EndDate { get; set; }
+
+        [Required]
         public int MinValue { get; set; }
 
+        [Required]
         public virtual ArtWork ArtWork { get; set; }
+
+        [Required]
         public virtual AuctionState AuctionState { get; set; }
+
         public virtual ICollection<Bid> Bids { get; set; }
     }
 }

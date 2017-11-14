@@ -8,7 +8,13 @@ namespace Projeto.Models
     {
         [Key, Column(Order =1)]
         public DateTime DateHour { get; set; }
-        public int value { get; set; }
+
+
+        //public int value { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{}")]
+        public Decimal Value { get; set; }
 
         [Key]
         public virtual ArtWork ArtWork { get; set; }

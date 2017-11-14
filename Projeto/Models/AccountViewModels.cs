@@ -7,6 +7,7 @@ namespace Projeto.Models
     {
         [Required]
         [Display(Name = "Email")]
+        [EmailAddress]
         public string Email { get; set; }
     }
 
@@ -43,6 +44,7 @@ namespace Projeto.Models
     {
         [Required]
         [Display(Name = "Email")]
+        [EmailAddress]
         public string Email { get; set; }
     }
 
