@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Projeto.Models.PaymentMethod>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("New Payment Method", "New", "PaymentMethod", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Payment Method</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var paymentMethod in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => paymentMethod.Id);
+                </td>
+                <td>
+                    @Html.ActionLink(paymentMethod.Name, "Edit", "PaymentMethod", new { id = paymentMethod.Id }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
