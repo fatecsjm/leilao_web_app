@@ -1,4 +1,6 @@
-﻿using Projeto.Models;
+﻿using AutoMapper;
+using Projeto.Dtos;
+using Projeto.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +21,10 @@ namespace Projeto.Controllers.Api
         }
 
         // GET /api/paymentmethod
-        public IEnumerable<PaymentMethod> GetPaymentMethods()
+        public IHttpActionResult GetPaymentMethods()
         {
-
-            return _context.PaymentMethod.ToList();
+            var paymentDtos = _context.PaymentMethod.ToList().Select(Mapper.Map<PaymentMethod, PaymentMethodDto>);
+            return Ok(paymentDtos);
         }
 
         //protected override void Dispose(bool disposing)
@@ -30,53 +32,69 @@ namespace Projeto.Controllers.Api
         //    _context.Dispose();
         //}
 
-        // GET /api/paymentmethod/1
-        public PaymentMethod GetPaymentMethod(int id)
-        {
+        public IHttpActionResult GetPaymentMethod(int id)
+        {// GET /api/paymentmethod/1
             var payment = _context.PaymentMethod.SingleOrDefault(c => c.Id == id);
 
             if (payment == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-
-            return payment;
+                //throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
+            //return Mapper.Map<PaymentMethod, PaymentMethodDto>(payment);
+            return Ok(Mapper.Map<PaymentMethod, PaymentMethodDto>(payment));
         }
 
         // POST /api/paymentmethod
         [HttpPost]
-        public PaymentMethod CreatePaymentMethod(PaymentMethod paymentMethod)
+        public IHttpActionResult CreatePaymentMethod(PaymentMethodDto paymentMethodDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-
+                //throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
+            var paymentMethod = Mapper.Map<PaymentMethodDto, PaymentMethod>(paymentMethodDto);
             _context.PaymentMethod.Add(paymentMethod);
             _context.SaveChanges();
 
-            return paymentMethod;
+            paymentMethodDto.Id = paymentMethod.Id;
+
+            //return paymentMethodDto;
+            return Created(new Uri(Request.RequestUri + "/" + paymentMethod.Id.ToString()), paymentMethodDto);
         }
+        
         // PUT /api/paymentmethod/1
         [HttpPut]
-        public void UpdatePaymentMethod(int id, PaymentMethod paymentMethod)
+        public IHttpActionResult UpdatePaymentMethod(int id, PaymentMethodDto paymentMethodDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                //throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
+
             var paymentInDb = _context.PaymentMethod.SingleOrDefault(c => c.Id == id);
             if (paymentInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            paymentInDb.Name = paymentMethod.Name;
+                //throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
+
+            Mapper.Map<PaymentMethodDto, PaymentMethod>(paymentMethodDto, paymentInDb);
+            //Because of mapper we don't need the following lines
+            //I'll keep them here for reference
+            //paymentInDb.Name = paymentMethodDto.Name;
             _context.SaveChanges();
 
+            return Ok();
         }
 
         // Delete /api/paymentmethod/1
         [HttpDelete]
-        public void DeletePaymentMethod(int id)
+        public IHttpActionResult DeletePaymentMethod(int id)
         {
             var paymentInDb = _context.PaymentMethod.SingleOrDefault(c => c.Id == id);
             if (paymentInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                //throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
+
             _context.PaymentMethod.Remove(paymentInDb);
             _context.SaveChanges();
 
+            return Ok();
         }
     }
 }
