@@ -1,0 +1,78 @@
+﻿@{var id = ViewBag.payId; }
+@{
+    ViewBag.Title = "PaymentMethodForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditPaymentMethodForm</h2>
+
+@*using (Html.BeginForm("Save", "PaymentMethod", FormMethod.Post, new { @id = "my_form" }))
+{
+    <div class="form-group">
+        Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        
+
+    </div>
+    Html.HiddenFor(m => m.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Save</button>
+
+ }
+ *@
+@using (Html.BeginForm())
+{
+        <label>Name</label>
+        <input type="text" class="form-control" id="payName" value="" />
+        <button class="btn btn-primary" onclick="UpdatePayment(); return false;">Update</button>
+@Html.AntiForgeryToken()
+}
+
+    @section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+            if (@id != null)
+            {
+            console.log("entrei no if do script")
+                $.ajax({
+                    url: "/api/paymentMethod/" +  @id,
+                    method: "GET",
+                    data: @id,
+                    success: function (data) {
+                        //button.parents("tr").remove();
+                        if (data != null) {
+                            console.log("entrei no if do data diferente de null")
+                            console.log(data)
+                            $('#payName').val(data["name"]);
+                        }
+                        //.remove vai apagar o registo do JSON, .draw() volta a desenhar a tabela
+                    }
+                });
+            }
+        });
+
+        function UpdatePayment() {
+            var paymentMethodDto = {
+                ID: @id,
+                Name: $('#payName').val(),
+            };
+            $.ajax({
+                url: '/api/paymentMethod/'+@id,
+                type: 'PUT',
+                data: JSON.stringify(paymentMethodDto),
+                //data: paymentMethodDto, //this doesn't work
+                contentType: "application/json;charset=utf-8",
+                success: function () {
+                    alert("Actualizado com sucesso");
+                    window.location.href = '/paymentMethod/';
+                },
+                error: function () {
+                    alert("deu erro");
+                }
+            });
+        }
+
+    </script>
+    }

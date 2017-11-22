@@ -57,7 +57,10 @@ namespace Projeto.Controllers.Api
             paymentMethodDto.Id = paymentMethod.Id;
 
             //return paymentMethodDto;
-            return Created(new Uri(Request.RequestUri + "/" + paymentMethod.Id.ToString()), paymentMethodDto);
+            //return Created(new Uri(Request.RequestUri.GetLeftPart(UriPartial.Authority)), paymentMethodDto.Id);
+            //return Created(new Uri(@"http://localhost:49642/paymentMethod"), paymentMethodDto.Id);
+            //return Redirect(Url.Content("~/"));
+            return Created(new Uri(Request.RequestUri + "/" + paymentMethod.Id), paymentMethodDto);
         }
         
         // PUT /api/paymentmethod/1

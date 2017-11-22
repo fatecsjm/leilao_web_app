@@ -25,14 +25,17 @@ namespace Projeto.Controllers
         // GET: PaymentMethod
         public ActionResult Index()
         {
-            var paymentsMethods = _context.PaymentMethod.ToList();
-            return View(paymentsMethods);
+            //var paymentsMethods = _context.PaymentMethod.ToList();
+            //return View(paymentsMethods);
+            return View();
         }
 
         public ActionResult New()
         {
-            var payment = new PaymentMethod();
-            return View("PaymentMethodForm", payment);
+            //var payment = new PaymentMethod();
+            //payment.id =0
+            //return View("PaymentMethodForm", payment);
+            return View("NewPaymentMethodForm");
         }
 
         [HttpPost]
@@ -41,7 +44,7 @@ namespace Projeto.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("PaymentMethodForm");
+                return View("NewPaymentMethodForm");
             }
 
 
@@ -61,12 +64,15 @@ namespace Projeto.Controllers
         //[Route("PaymentMethods/Edit/{id:regex(\\d{2}):range(1,1000)}")]
         public ActionResult Edit(int id)
         {
-            var payment = _context.PaymentMethod.SingleOrDefault(p => p.Id == id);
+            /*var payment = _context.PaymentMethod.SingleOrDefault(p => p.Id == id);
 
             if (payment == null)
                 return HttpNotFound();
 
             return View("PaymentMethodForm", payment);
+            */
+            ViewBag.payId = id;
+            return View("EditPaymentMethodForm");
         }
 
 

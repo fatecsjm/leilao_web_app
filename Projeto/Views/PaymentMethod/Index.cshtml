@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Projeto.Models.PaymentMethod>
+﻿@*model IEnumerable<Projeto.Models.PaymentMethod>*@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,15 +8,17 @@
 <p>
     @Html.ActionLink("New Payment Method", "New", "PaymentMethod", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table table-bordered table-hover">
+<table id="paymentMethods" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>ID</th>
             <th>Payment Method</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var paymentMethod in Model)
+        <!--
+        @*@foreach (var paymentMethod in Model)
         {
             <tr>
                 <td>
@@ -25,8 +27,62 @@
                 <td>
                     @Html.ActionLink(paymentMethod.Name, "Edit", "PaymentMethod", new { id = paymentMethod.Id }, null)
                 </td>
+                <td>
+                    <button data-payment-id="@paymentMethod.Id" class="btn-link js-delete">Delete</button>
+                </td>
             </tr>
-        }
+        }*@
+        -->
+        
     </tbody>
 </table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#paymentMethods").DataTable({
+                ajax: {
+                    url: "/api/paymentmethod",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "id"
+                    },
+                    {
+                        data: "name",
+                        render: function (data, type, paymentmethod) {
+                            return "<a href='/paymentmethod/edit/" + paymentmethod.id + "'>" + paymentmethod.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-payment-id=" + data + ">Delete</button>";
+                        }
+                    },
 
+                ]
+            });
+
+            $("#paymentMethods").on("click", ".js-delete", function ()
+            {
+                var button = $(this);
+                if (confirm("Are you sure you want to delete?"))
+                {
+                    $.ajax({
+                        url: "/api/paymentMethod/" + button.attr("data-payment-id"),
+                        method: "DELETE",
+                        success: function () {
+                            //button.parents("tr").remove();
+                            table.row(button.parents("tr")).remove().draw();
+                            //.remove vai apagar o registo do JSON, .draw() volta a desenhar a tabela
+                        }
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}
