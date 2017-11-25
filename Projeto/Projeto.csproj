@@ -209,9 +209,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\PaymentMethodController.cs" />
+    <Compile Include="Controllers\Api\ArtWorkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ArtWorkController.cs" />
     <Compile Include="Controllers\PaymentMethodController.cs" />
+    <Compile Include="Dtos\ArtWorkDto.cs" />
     <Compile Include="Dtos\PaymentMethodDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -502,6 +505,9 @@
     <Content Include="Views\PaymentMethod\Index.cshtml" />
     <Content Include="Views\PaymentMethod\NewPaymentMethodForm.cshtml" />
     <Content Include="Views\PaymentMethod\EditPaymentMethodForm.cshtml" />
+    <Content Include="Views\ArtWork\EditArtWorkForm.cshtml" />
+    <Content Include="Views\ArtWork\Index.cshtml" />
+    <Content Include="Views\ArtWork\NewArtWorkForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

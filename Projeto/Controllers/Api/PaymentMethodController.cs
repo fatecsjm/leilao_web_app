@@ -12,7 +12,6 @@ namespace Projeto.Controllers.Api
 {
     public class PaymentMethodController : ApiController
     {
-
         private ApplicationDbContext _context;
 
         public PaymentMethodController()
@@ -40,7 +39,9 @@ namespace Projeto.Controllers.Api
                 //throw new HttpResponseException(HttpStatusCode.NotFound);
                 return NotFound();
             //return Mapper.Map<PaymentMethod, PaymentMethodDto>(payment);
-            return Ok(Mapper.Map<PaymentMethod, PaymentMethodDto>(payment));
+            //return Ok(Mapper.Map<PaymentMethod, PaymentMethodDto>(payment));
+            return Json(payment);
+
         }
 
         // POST /api/paymentmethod

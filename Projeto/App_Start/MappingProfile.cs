@@ -14,10 +14,12 @@ namespace Projeto.App_Start
         {
             //Model to Dto
             Mapper.CreateMap<PaymentMethod, PaymentMethodDto>();
+            Mapper.CreateMap<ArtWork, ArtWorkDto>();
 
 
             //Dto to Model
-            Mapper.CreateMap<PaymentMethodDto, PaymentMethod>().ForMember(c => c.Id, opt => opt.Ignore()); ;
+            Mapper.CreateMap<PaymentMethodDto, PaymentMethod>().ForMember(c => c.Id, opt => opt.Ignore());
+            Mapper.CreateMap<ArtWorkDto, ArtWork>().ForMember(c => c.Id, opt => opt.Ignore()); ;
         }
     }
 }
