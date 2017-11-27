@@ -1,0 +1,47 @@
+﻿@model Projeto.Models.ArtWork
+
+@{
+    ViewBag.Title = "InsertArtwork";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Insert Artwork</h2>
+
+
+    <div class="card-panel teal grey lighten-5">
+        <div class="row">
+            <div class="col s12 s12 m6 offset-m3">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                 
+
+                                @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control", placeholder = "Title"}})
+                                @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                 
+                                @Html.EditorFor(model => model.CreationDate, new {htmlAttributes = new {@class = "form-control", placeholder = "Creation Date"}})
+                                @Html.ValidationMessageFor(model => model.CreationDate, "", new {@class = "text-danger"})
+                     
+                                @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control", placeholder = "Description"}})
+                                @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+                          
+
+                  
+                                @Html.EditorFor(model => model.Image, new {htmlAttributes = new {@class = "form-control", placeholder = "Image"}})
+                                @Html.ValidationMessageFor(model => model.Image, "", new {@class = "text-danger"})
+                       
+                                <input type="submit" value="Create" style="display: block; margin: 0 auto;" class="waves-effect waves-light btn red darken-4"/>
+                }
+            </div>
+        </div>
+    </div>
+<div>
+    @Html.ActionLink("Back to List", "Index","Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
