@@ -38,6 +38,13 @@ namespace Projeto.Controllers
             return View("NewArtWorkForm");
         }
 
+        public ActionResult InsertArtwork()
+        {
+
+
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(ArtWork artWork)
