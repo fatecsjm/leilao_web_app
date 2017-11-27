@@ -27,7 +27,7 @@
                     @{
                         if (User.IsInRole("Rambo"))
                         {
-                            <li>@Html.ActionLink("Admin", "Index", "Admin", new { @style = "background-color:#ffcc00" })</li>
+                            <li>@Html.ActionLink("Admin", "Index", "Admin", null, new { style = "background-color:#ffcc00" })</li>
                         }
 
                     }

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Projeto.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Rambo")]
     public class AdminController : Controller
     {
         public ActionResult Index()
