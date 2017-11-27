@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "NewPaymentMethodForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NewPaymentMethodForm</h2>
+
+@*using (Html.BeginForm("Save", "PaymentMethod", FormMethod.Post, new { @id = "my_form" }))
+    {*@
+<form>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" id="payName" value=""/>
+    </div>
+    @*Html.AntiForgeryToken()*@
+    <button class="btn btn-primary" id="btn-new" onclick="NewPayment(); return false;" >Save</button>
+</form>
+@*}*@
+
+@section scripts
+{
+<script type="text/javascript">
+    function NewPayment() {
+            var paymentMethodDto = {
+            ID: 0,
+            Name: $('#payName').val(),
+            };
+            $.ajax({
+            url: '/api/paymentMethod/',
+            type: 'POST' ,
+            data: JSON.stringify(paymentMethodDto),
+                //data: paymentMethodDto, //this doesn't work
+                contentType: "application/json;charset=utf-8",
+                success: function () {
+                    alert("Adicionado com sucesso");
+                    window.location.href = '/paymentMethod/';
+                },
+                error: function () {
+                    alert("deu erro");
+                }
+            });
+     }
+</script>
+}

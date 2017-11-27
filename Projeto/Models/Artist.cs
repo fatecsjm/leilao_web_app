@@ -14,6 +14,6 @@ namespace Projeto.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        public virtual ICollection<ArtWork> Artwork { get; set; }
+        
     }
 }

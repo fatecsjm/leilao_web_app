@@ -6,9 +6,11 @@ namespace Projeto.Models
 {
     public class Price
     {
-        [Key, Column(Order =1)]
-        public DateTime DateHour { get; set; }
+        [Key]
+        public int Id { get; set; }
 
+        [Required]
+        public DateTime DateHour { get; set; }
 
         //public int value { get; set; }
         [Required]

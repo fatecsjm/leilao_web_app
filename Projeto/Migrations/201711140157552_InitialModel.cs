@@ -11,7 +11,7 @@ namespace Projeto.Migrations
                 "dbo.Addresses",
                 c => new
                     {
-                        AddressId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Line1 = c.String(),
                         Line2 = c.String(),
                         ZipCode = c.String(),
@@ -19,7 +19,7 @@ namespace Projeto.Migrations
                         Date = c.DateTime(nullable: false),
                         ApplicationUser_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.AddressId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.ApplicationUser_Id);
             
@@ -47,18 +47,16 @@ namespace Projeto.Migrations
                 "dbo.Bids",
                 c => new
                     {
-                        date_hour = c.DateTime(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
+                        DateHour = c.DateTime(nullable: false),
                         value = c.Int(nullable: false),
                         ApplicationUser_Id = c.String(maxLength: 128),
-                        AuctionState_Id = c.Int(),
                         Auction_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.date_hour)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
-                .ForeignKey("dbo.AuctionStates", t => t.AuctionState_Id)
                 .ForeignKey("dbo.Auctions", t => t.Auction_Id)
                 .Index(t => t.ApplicationUser_Id)
-                .Index(t => t.AuctionState_Id)
                 .Index(t => t.Auction_Id);
             
             CreateTable(
@@ -131,19 +129,20 @@ namespace Projeto.Migrations
                 "dbo.Prices",
                 c => new
                     {
+                        Id = c.Int(nullable: false, identity: true),
                         DateHour = c.DateTime(nullable: false),
                         value = c.Int(nullable: false),
                         ArtWork_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.DateHour)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ArtWorks", t => t.ArtWork_Id)
                 .Index(t => t.ArtWork_Id);
-            
+          /*  
             CreateTable(
                 "dbo.Purchases",
                 c => new
                     {
-                        PurchaseId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         DateHour = c.DateTime(nullable: false),
                         Address_AddressId = c.Int(),
                         AddressUser_AddressId = c.Int(),
@@ -151,7 +150,7 @@ namespace Projeto.Migrations
                         State_Id = c.Int(),
                         Address_AddressId1 = c.Int(),
                     })
-                .PrimaryKey(t => t.PurchaseId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.Address_AddressId)
                 .ForeignKey("dbo.Addresses", t => t.AddressUser_AddressId)
                 .ForeignKey("dbo.PaymentMethods", t => t.PaymentMethod_Id)
@@ -162,7 +161,7 @@ namespace Projeto.Migrations
                 .Index(t => t.PaymentMethod_Id)
                 .Index(t => t.State_Id)
                 .Index(t => t.Address_AddressId1);
-            
+            */
             CreateTable(
                 "dbo.PaymentMethods",
                 c => new
@@ -253,7 +252,7 @@ namespace Projeto.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
+            /*
             CreateTable(
                 "dbo.PurchaseArtWorks",
                 c => new
@@ -266,27 +265,29 @@ namespace Projeto.Migrations
                 .ForeignKey("dbo.ArtWorks", t => t.ArtWork_Id, cascadeDelete: true)
                 .Index(t => t.Purchase_PurchaseId)
                 .Index(t => t.ArtWork_Id);
-            
+            */
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Purchases", "Address_AddressId1", "dbo.Addresses");
+            //DropForeignKey("dbo.Purchases", "Address_AddressId1", "dbo.Addresses");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Bids", "Auction_Id", "dbo.Auctions");
-            DropForeignKey("dbo.Bids", "AuctionState_Id", "dbo.AuctionStates");
+            //DropForeignKey("dbo.Bids", "AuctionState_Id", "dbo.AuctionStates");
             DropForeignKey("dbo.Auctions", "AuctionState_Id", "dbo.AuctionStates");
             DropForeignKey("dbo.ShoppingCarts", "Artwork_Id", "dbo.ArtWorks");
             DropForeignKey("dbo.ShoppingCarts", "ApplicationUser_Id", "dbo.AspNetUsers");
+            /*
             DropForeignKey("dbo.Purchases", "State_Id", "dbo.States");
             DropForeignKey("dbo.Purchases", "PaymentMethod_Id", "dbo.PaymentMethods");
             DropForeignKey("dbo.PurchaseArtWorks", "ArtWork_Id", "dbo.ArtWorks");
             DropForeignKey("dbo.PurchaseArtWorks", "Purchase_PurchaseId", "dbo.Purchases");
             DropForeignKey("dbo.Purchases", "AddressUser_AddressId", "dbo.Addresses");
             DropForeignKey("dbo.Purchases", "Address_AddressId", "dbo.Addresses");
+            */
             DropForeignKey("dbo.Prices", "ArtWork_Id", "dbo.ArtWorks");
             DropForeignKey("dbo.ArtWorks", "Finality_Id", "dbo.Finalities");
             DropForeignKey("dbo.ArtWorks", "Category_Id", "dbo.Categories");
@@ -294,8 +295,10 @@ namespace Projeto.Migrations
             DropForeignKey("dbo.ArtWorks", "Artist_Id", "dbo.Artists");
             DropForeignKey("dbo.Bids", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Addresses", "ApplicationUser_Id", "dbo.AspNetUsers");
+            /*
             DropIndex("dbo.PurchaseArtWorks", new[] { "ArtWork_Id" });
             DropIndex("dbo.PurchaseArtWorks", new[] { "Purchase_PurchaseId" });
+            */
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -303,11 +306,13 @@ namespace Projeto.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.ShoppingCarts", new[] { "Artwork_Id" });
             DropIndex("dbo.ShoppingCarts", new[] { "ApplicationUser_Id" });
+            /*
             DropIndex("dbo.Purchases", new[] { "Address_AddressId1" });
             DropIndex("dbo.Purchases", new[] { "State_Id" });
             DropIndex("dbo.Purchases", new[] { "PaymentMethod_Id" });
             DropIndex("dbo.Purchases", new[] { "AddressUser_AddressId" });
             DropIndex("dbo.Purchases", new[] { "Address_AddressId" });
+            */
             DropIndex("dbo.Prices", new[] { "ArtWork_Id" });
             DropIndex("dbo.ArtWorks", new[] { "Finality_Id" });
             DropIndex("dbo.ArtWorks", new[] { "Category_Id" });
@@ -315,11 +320,11 @@ namespace Projeto.Migrations
             DropIndex("dbo.Auctions", new[] { "AuctionState_Id" });
             DropIndex("dbo.Auctions", new[] { "ArtWork_Id" });
             DropIndex("dbo.Bids", new[] { "Auction_Id" });
-            DropIndex("dbo.Bids", new[] { "AuctionState_Id" });
+            //DropIndex("dbo.Bids", new[] { "AuctionState_Id" });
             DropIndex("dbo.Bids", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Addresses", new[] { "ApplicationUser_Id" });
-            DropTable("dbo.PurchaseArtWorks");
+            //DropTable("dbo.PurchaseArtWorks");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
@@ -328,7 +333,7 @@ namespace Projeto.Migrations
             DropTable("dbo.ShoppingCarts");
             DropTable("dbo.States");
             DropTable("dbo.PaymentMethods");
-            DropTable("dbo.Purchases");
+            //DropTable("dbo.Purchases");
             DropTable("dbo.Prices");
             DropTable("dbo.Finalities");
             DropTable("dbo.Categories");

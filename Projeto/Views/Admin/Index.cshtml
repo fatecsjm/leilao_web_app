@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Admin</h2>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+                <li>@Html.ActionLink("Payment Methods", "Index", "PaymentMethod")</li>
+                <li>@Html.ActionLink("ArtWorks", "Index", "ArtWork")</li>
+                <li>@Html.ActionLink("Auctions", "Index", "Auction")</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
