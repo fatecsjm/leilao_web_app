@@ -23,17 +23,11 @@ namespace Projeto.Dtos
 
         public string Image { get; set; }
 
-        //aqui vai dar problema?
-        public Price Price { get; set; }
+        [Required]
+        public FinalityDto Finality { get; set; }
 
         [Required]
-        public Artist Artist { get; set; }
-
-        [Required]
-        public Finality Finality { get; set; }
-
-        [Required]
-        public Category Category { get; set; }
+        public CategoryDto Category { get; set; }
 
     }
 

@@ -38,11 +38,11 @@
                 $.ajax({
                     url: "/api/paymentMethod/" +  @id,
                     method: "GET",
-                    data: @id,
+                    dataType: 'json',
                     success: function (data) {
                         //button.parents("tr").remove();
                         if (data != null) {
-                            $('#payName').val(data["name"]);
+                            $('#payName').val(data.Name);
                         }
                         //.remove vai apagar o registo do JSON, .draw() volta a desenhar a tabela
                     }

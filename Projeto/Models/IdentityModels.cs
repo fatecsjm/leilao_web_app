@@ -37,7 +37,8 @@ namespace Projeto.Models
         public DbSet<Auction> Auction { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Price> Price { get; set;}
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Finality> Finality { get; set; }
+        //public DbSet<Role> Roles { get; set; }
         public DbSet<Bid> Bid { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<Purchase> Purchase { get; set; }

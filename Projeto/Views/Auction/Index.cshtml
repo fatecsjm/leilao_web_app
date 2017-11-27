@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("New Auction", "New", "Auction", null, new { @class = "btn btn-primary" })
+</p>
+<table id="Auctions" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Auction</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        
+    </tbody>
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+                $.ajax({
+                    url: "/api/auction",
+                    method: "GET",
+                    dataType: 'json',
+                    success: function (data)
+                    {
+                        console.log(data);
+                    }
+                })
+            });
+
+            $("#paymentMethods").on("click", ".js-delete", function ()
+            {
+                var button = $(this);
+                if (confirm("Are you sure you want to delete?"))
+                {
+                    $.ajax({
+                        url: "/api/paymentMethod/" + button.attr("data-payment-id"),
+                        method: "DELETE",
+                        success: function () {
+                            //button.parents("tr").remove();
+                            table.row(button.parents("tr")).remove().draw();
+                            //.remove vai apagar o registo do JSON, .draw() volta a desenhar a tabela
+                        }
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}

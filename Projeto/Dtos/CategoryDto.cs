@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Projeto.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Projeto.Models
+namespace Projeto.Dtos
 {
-    public class AuctionState
+    public class CategoryDto
     {
         [Key]
         public int Id { get; set; }
@@ -15,7 +16,6 @@ namespace Projeto.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-       
-        public virtual ICollection<Auction> Auction { get; set; }
     }
+
 }

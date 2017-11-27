@@ -24,7 +24,14 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Payment Methods", "Index", "PaymentMethod")</li>
+                    @{
+                        if (User.IsInRole("Rambo"))
+                        {
+                            <li>@Html.ActionLink("Admin", "Index", "Admin", new { @style = "background-color:#ffcc00" })</li>
+                        }
+
+                    }
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

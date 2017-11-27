@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Projeto.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace Projeto.Models
+namespace Projeto.Dtos
 {
-    public class Bid
+    public class BidDto
     {
         [Key]
         public int Id { get; set; }
@@ -17,9 +21,7 @@ namespace Projeto.Models
         //[DisplayFormat(DataFormatString = "{}")]
         public Decimal Value { get; set; }
 
-        [Key]
-        public virtual ApplicationUser ApplicationUser { get; set; }
-        [Key]
-        public virtual Auction Auction { get; set; }
+
     }
+
 }

@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace Projeto.Controllers.Api
 {
+    [Authorize]
     public class PaymentMethodController : ApiController
     {
         private ApplicationDbContext _context;

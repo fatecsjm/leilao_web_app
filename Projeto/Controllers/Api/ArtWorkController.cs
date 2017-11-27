@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Data.Entity;
 
 namespace Projeto.Controllers.Api
 {
@@ -23,15 +22,14 @@ namespace Projeto.Controllers.Api
         // GET /api/artwork
         public IHttpActionResult GetArtWorks()
         {
-            
-                var artWorks = _context.ArtWork.ToList();
+            var artWorks = _context.ArtWork.ToList().Select(Mapper.Map<ArtWork, ArtWorkDto>);
                 //.Include(m => m.Price)
                 //.Include(m => m.Artist)
                 //.Include(m => m.Finality)
                 //.Include(m => m.Category);
                 
             //return Json(artWorks.ToList().Select(Mapper.Map<ArtWork, ArtWorkDto>));
-            return Json(artWorks.ToList());
+            return Json(artWorks);
         }
 
         public IHttpActionResult GetArtWork(int id)
@@ -41,9 +39,14 @@ namespace Projeto.Controllers.Api
             if (artwork == null)
                 //throw new HttpResponseException(HttpStatusCode.NotFound);
                 return NotFound();
-
+            ArtWorkDto art = Mapper.Map<ArtWork, ArtWorkDto>(artwork);
             //return Ok(Mapper.Map<ArtWork, ArtWorkDto>(artwork));
-            return Json(artwork);
+            return Json(art);
         }
+
+        //para criar obra tem que ser admin
+        //[Authorize]
+
+
     }
 }

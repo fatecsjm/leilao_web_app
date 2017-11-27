@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Projeto.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Projeto.Controllers
 {
@@ -156,6 +157,14 @@ namespace Projeto.Controllers
 
                 if (result.Succeeded)
                 {
+                    /*
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole("Rambo"));
+                    await UserManager.AddToRoleAsync(user.Id, "Rambo");
+                    */
+                    
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

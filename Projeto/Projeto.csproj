@@ -208,13 +208,22 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\BidController.cs" />
+    <Compile Include="Controllers\Api\AuctionController.cs" />
+    <Compile Include="Controllers\AuctionController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Api\PaymentMethodController.cs" />
     <Compile Include="Controllers\Api\ArtWorkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ArtWorkController.cs" />
     <Compile Include="Controllers\PaymentMethodController.cs" />
+    <Compile Include="Dtos\BidDto.cs" />
+    <Compile Include="Dtos\AuctionStateDto.cs" />
+    <Compile Include="Dtos\CategoryDto.cs" />
+    <Compile Include="Dtos\FinalityDto.cs" />
     <Compile Include="Dtos\ArtWorkDto.cs" />
+    <Compile Include="Dtos\AuctionDto.cs" />
     <Compile Include="Dtos\PaymentMethodDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +235,26 @@
     <Compile Include="Migrations\201711140305483_ModelsConstraintsUpdate.cs" />
     <Compile Include="Migrations\201711140305483_ModelsConstraintsUpdate.Designer.cs">
       <DependentUpon>201711140305483_ModelsConstraintsUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711262312050_RemoveListOfArtworksFromArtistModel.cs" />
+    <Compile Include="Migrations\201711262312050_RemoveListOfArtworksFromArtistModel.Designer.cs">
+      <DependentUpon>201711262312050_RemoveListOfArtworksFromArtistModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711270229422_AnotherUpdate.cs" />
+    <Compile Include="Migrations\201711270229422_AnotherUpdate.Designer.cs">
+      <DependentUpon>201711270229422_AnotherUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711270250230_RemoveBidsFromModelAuctionState.cs" />
+    <Compile Include="Migrations\201711270250230_RemoveBidsFromModelAuctionState.Designer.cs">
+      <DependentUpon>201711270250230_RemoveBidsFromModelAuctionState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711271104280_SeedUsers.cs" />
+    <Compile Include="Migrations\201711271104280_SeedUsers.Designer.cs">
+      <DependentUpon>201711271104280_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711271140387_SeedMostTables.cs" />
+    <Compile Include="Migrations\201711271140387_SeedMostTables.Designer.cs">
+      <DependentUpon>201711271140387_SeedMostTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -384,6 +413,21 @@
     <EmbeddedResource Include="Migrations\201711140305483_ModelsConstraintsUpdate.resx">
       <DependentUpon>201711140305483_ModelsConstraintsUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711262312050_RemoveListOfArtworksFromArtistModel.resx">
+      <DependentUpon>201711262312050_RemoveListOfArtworksFromArtistModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711270229422_AnotherUpdate.resx">
+      <DependentUpon>201711270229422_AnotherUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711270250230_RemoveBidsFromModelAuctionState.resx">
+      <DependentUpon>201711270250230_RemoveBidsFromModelAuctionState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271104280_SeedUsers.resx">
+      <DependentUpon>201711271104280_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271140387_SeedMostTables.resx">
+      <DependentUpon>201711271140387_SeedMostTables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\SeedData\Roles.xml" />
     <EmbeddedResource Include="Models\SeedData\States.xml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -508,6 +552,8 @@
     <Content Include="Views\ArtWork\EditArtWorkForm.cshtml" />
     <Content Include="Views\ArtWork\Index.cshtml" />
     <Content Include="Views\ArtWork\NewArtWorkForm.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Auction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
