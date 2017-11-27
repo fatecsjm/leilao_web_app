@@ -13,10 +13,10 @@ namespace Projeto.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult About(int id)
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewBag.auctionId = id;
             return View();
         }
 

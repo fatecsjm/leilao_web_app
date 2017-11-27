@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ArtWorkController.cs" />
     <Compile Include="Controllers\PaymentMethodController.cs" />
+    <Compile Include="Dtos\ApplicationUserDto.cs" />
     <Compile Include="Dtos\BidDto.cs" />
     <Compile Include="Dtos\AuctionStateDto.cs" />
     <Compile Include="Dtos\CategoryDto.cs" />

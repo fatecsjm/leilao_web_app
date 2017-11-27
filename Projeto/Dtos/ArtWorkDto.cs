@@ -24,6 +24,20 @@ namespace Projeto.Dtos
         public string Image { get; set; }
 
         [Required]
+        public int Artist_Id { get; set; }
+
+        [Required]
+        public int Finality_Id { get; set; }
+
+        [Required]
+        public int Category_Id { get; set; }
+
+
+
+        [Required]
+        public Artist Artist { get; set; }
+
+        [Required]
         public FinalityDto Finality { get; set; }
 
         [Required]

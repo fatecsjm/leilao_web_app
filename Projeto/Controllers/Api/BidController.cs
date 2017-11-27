@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Projeto.Dtos;
 using Projeto.Models;
 using System;
@@ -33,7 +34,31 @@ namespace Projeto.Controllers.Api
         }
 
         //tem que ser user registado para criar uma bid
-        //[Authorize]
-        //Post /api/bid/{id da auction}
+
+        //Post /api/bid/
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult CreateBid(BidDto bidDto)
+        {
+            bidDto.DateHour = DateTime.Now;
+            bidDto.ApplicationUser = new ApplicationUserDto();
+            bidDto.ApplicationUser.Id = User.Identity.GetUserId();
+            bidDto.ApplicationUser.UserName = User.Identity.Name;
+            if (!ModelState.IsValid)
+                //throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
+            var bid = Mapper.Map<BidDto, Bid>(bidDto);
+            _context.Bid.Add(bid);
+            _context.SaveChanges();
+
+            bidDto.Id = bid.Id;
+
+            //return paymentMethodDto;
+            //return Created(new Uri(Request.RequestUri.GetLeftPart(UriPartial.Authority)), paymentMethodDto.Id);
+            //return Created(new Uri(@"http://localhost:49642/paymentMethod"), paymentMethodDto.Id);
+            //return Redirect(Url.Content("~/"));
+            return Created(new Uri(Request.RequestUri + "/" + bid.Id), bidDto);
+
+        }
     }
 }

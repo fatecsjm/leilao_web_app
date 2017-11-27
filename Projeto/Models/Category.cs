@@ -15,6 +15,6 @@ namespace Projeto.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        public ICollection<ArtWork> Artwork { get; set; }
+        //public ICollection<ArtWork> Artwork { get; set; }
     }
 }

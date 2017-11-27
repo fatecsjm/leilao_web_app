@@ -1,4 +1,5 @@
-﻿@{
+﻿@{var id = ViewBag.auctionId; }
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
@@ -6,20 +7,27 @@
 
 <p>Use this area to provide additional information.</p>
 
-<p> Hello World</p>
-<input id="mybid" type="text" name="name" value="" />
-<button onclick="bid();">Bid</button>
+<p> Auction</p>
+@{ 
+    if (User.Identity.IsAuthenticated && !User.IsInRole("Rambo"))
+    {
+
+    <input id="mybid" type="text" name="name" value="" />
+    <button onclick="bid(); return false;">Bid</button>
+    
+    }
+}
 <div id="chartContainer" style="height: 300px; width: 360px;"></div>
 
-
-    @section scripts {
+@section scripts {
 <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
 <script src="~/signalr/js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <script type="text/javascript">
-console.log(new Date())
+    console.log(new Date())
     var points = [
+        /*
         { 'x': new Date(2000, 0), 'y': 0.65, 'indexLabel': 'John' },
         { 'x': new Date(2000, 1), 'y': -0.8, 'indexLabel': 'Melissa' },
         { 'x': new Date(2000, 2), 'y': -0.9, 'indexLabel': 'John' },
@@ -31,6 +39,7 @@ console.log(new Date())
         { 'x': new Date(2000, 8), 'y': 1.37, 'indexLabel': 'John' },
         { 'x': new Date(2000, 9), 'y': -1.35, 'indexLabel': 'John' },
         { 'x': new Date(2000, 10), 'y': -0.72, 'indexLabel': 'John' }
+       */
     ];
     var mychart = new CanvasJS.Chart("chartContainer",
         {
@@ -55,6 +64,7 @@ console.log(new Date())
             ]
         });
     window.onload = function () {
+        callApiBids();
         mychart.render();
     }
 
@@ -79,19 +89,68 @@ console.log(new Date())
         alert("welcome");
     }
 
+    $.connection.myHub.client.bidMessage = function (message) {
+        alert(message);
+    }
+
     $.connection.myHub.client.updateBids = function (newBid) {
         console.log(newBid);
-        mychart.options.data[0].dataPoints.push({ 'x': new Date(newBid[0]), 'y': parseFloat(newBid[1]), 'indexLabel': newBid[2] });
+        mychart.options.data[0].dataPoints.push({ 'x': new Date(newBid.DateHour), 'y': parseFloat(newBid.Value), 'indexLabel': newBid.ApplicationUser.UserName });
         mychart.render();
     }
 
     function bid() {
-        var bid = $('#mybid').val();
-
-        $.connection.myHub.server.actualizaBidsNoCliente("client1",bid);
+        var newBid = {
+            //DateHour: null,
+            //ApplicationUser: null,
+            Auction: @id,
+            Value: parseFloat($('#mybid').val())
+        };
+        console.log(newBid);
+        $.connection.myHub.server.actualizaBidsNoCliente(newBid);
+        console.log("passei aqui paaa");
+        /*$.ajax({
+            url: '/api/bid/',
+            type: 'POST',
+            data: JSON.stringify(newBid),
+            //data: paymentMethodDto, //this doesn't work
+            contentType: "application/json;charset=utf-8",
+            success: function () {
+                alert("Adicionado com sucesso");
+            },
+            error: function () {
+                alert("deu erro");
+            }
+        });
+        */
 
     }
-    
+    function NewPayment() {
+        
+
+    }
+
+    function populateChart(initData) {
+        for (var i = 0; i < initData.length; i++) {
+            mychart.options.data[0].dataPoints.push({ 'x': new Date(initData[i].DateHour), 'y': parseFloat(initData[i].Value), 'indexLabel': initData[i].ApplicationUser.UserName });
+        }
+        mychart.render();
+    }
+
+    function callApiBids() {
+        $.ajax({
+            url: "/api/bid/"+@id,
+            method: "GET",
+            //data: "",
+            success: function (data) {
+                console.log("entrei");
+                points = data;
+
+                populateChart(data);
+            },
+            error: function () { console.log("erroerro") }
+        });
+    }
 
 </script>
 

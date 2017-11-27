@@ -20,6 +20,7 @@ namespace Projeto.App_Start
             Mapper.CreateMap<Category, CategoryDto>();
             Mapper.CreateMap<AuctionState, AuctionStateDto>();
             Mapper.CreateMap<Bid, BidDto>();
+            Mapper.CreateMap<ApplicationUser, ApplicationUserDto>();
 
 
             //Dto to Model
@@ -30,6 +31,7 @@ namespace Projeto.App_Start
             Mapper.CreateMap<CategoryDto, Category>().ForMember(c => c.Id, opt => opt.Ignore());
             Mapper.CreateMap<AuctionStateDto, AuctionState>().ForMember(c => c.Id, opt => opt.Ignore());
             Mapper.CreateMap<BidDto, Bid>().ForMember(c => c.Id, opt => opt.Ignore());
+            Mapper.CreateMap<ApplicationUserDto, ApplicationUser>().ForMember(c => c.Id, opt => opt.Ignore());
         }
     }
 }

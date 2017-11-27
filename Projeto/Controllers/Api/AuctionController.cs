@@ -46,6 +46,7 @@ namespace Projeto.Controllers.Api
         [HttpPost]
         //para criar auction tem que ser admin
         //[Authorize]
+        [Authorize(Roles = "Rambo")]
         public IHttpActionResult CreateAuction(Auction Auction)
         {
             return Created(new Uri(Request.RequestUri + "/" + Auction.Id), Auction);

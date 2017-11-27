@@ -29,6 +29,15 @@ namespace Projeto.Models
         public virtual ICollection<Auction> Auction { get; set; }
 
         [Required]
+        public int Artist_Id { get; set; }
+
+        [Required]
+        public int Finality_Id { get; set; }
+
+        [Required]
+        public int Category_Id { get; set; }
+
+        [Required]
         public virtual Artist Artist {get;set;}
 
         [Required]

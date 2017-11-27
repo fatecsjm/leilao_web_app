@@ -21,7 +21,9 @@ namespace Projeto.Dtos
         //[DisplayFormat(DataFormatString = "{}")]
         public Decimal Value { get; set; }
 
+        public virtual ApplicationUserDto ApplicationUser { get; set; }
 
+        public virtual AuctionDto Auction { get; set; }
     }
 
 }

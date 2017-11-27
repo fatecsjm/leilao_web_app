@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace Projeto.Controllers.Api
 {
-    [Authorize]
+    [Authorize(Roles = "Rambo")]
     public class PaymentMethodController : ApiController
     {
         private ApplicationDbContext _context;

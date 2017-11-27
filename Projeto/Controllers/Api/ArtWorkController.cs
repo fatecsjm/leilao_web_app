@@ -46,6 +46,24 @@ namespace Projeto.Controllers.Api
 
         //para criar obra tem que ser admin
         //[Authorize]
+        //[Authorize(Roles = "Rambo")]
+        [HttpPost]
+        public IHttpActionResult CreateArtWork(ArtWorkDto artworkDto)
+        {
+            //if (!ModelState.IsValid)
+            //    //throw new HttpResponseException(HttpStatusCode.BadRequest);
+            //    return BadRequest();
+            var artwork = Mapper.Map<ArtWorkDto, ArtWork>(artworkDto);
+            _context.ArtWork.Add(artwork);
+            _context.SaveChanges();
+
+            //return paymentMethodDto;
+            //return Created(new Uri(Request.RequestUri.GetLeftPart(UriPartial.Authority)), paymentMethodDto.Id);
+            //return Created(new Uri(@"http://localhost:49642/paymentMethod"), paymentMethodDto.Id);
+            //return Redirect(Url.Content("~/"));
+            return Created(new Uri(Request.RequestUri + "/" + artwork.Id), artwork);
+        }
+
 
 
     }
